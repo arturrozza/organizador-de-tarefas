@@ -35,6 +35,31 @@
                     <button class="mode-pill" data-mode="long">Longa</button>
                 </div>
             </div>
+
+            <div class="clock-wrap">
+                <svg class="clock-svg" viewBox="0 0 180 180">
+                    <circle class="clock-track" cx="90" cy="90" r="80"/>
+                    <circle class="clock-prog" id="clock-prog" cx="90" cy="90" r="80"
+                        stroke-dasharray="502.65"
+                        stroke-dashoffset="0"/>
+                </svg>
+                <div class="clock-center">
+                    <div class="clock-time" id="clock-time">25:00</div>
+                    <div class="clock-label" id="clock-label">FOCO</div>
+                </div>
+
+                <div class="timer-controls">
+                    <button class="ctrl-btn primary" id="btn-start" onclick="toggleTimer()">▶ Iniciar</button>
+                    <button class="ctrl-btn" onclick="resetTimer()">↺ Reset</button>
+                </div>
+
+
+                <div class="cycles-row">
+                    <span class="section-label">Ciclos</span>
+                    <div class="cycles-dots" id="cycles-dots"></div>
+                    <span style="font-size:11px;color:var(--muted);font-family:var(--mono);" id="cycle-count">0 / 4</span>
+                </div>
+            </div>
         </aside>
 
     </div>
