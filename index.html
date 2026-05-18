@@ -4,8 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Organizador de Tarefas</title>
+    
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="tasks.css">
+    <link rel="stylesheet" href="timer.css">
+    <link rel="stylesheet" href="variables.css">
+
 </head>
 <body>
+
+    <div class="app">
+
+        <header class="topbar">
+            <div class="logo"><span>Focus</span>Flow</div>
+            <div class="tagline">Tarefas & Pomodoro</div>
+            <div class="badge-ext" onclick="showExtTip()">
+                <span class="dot"></span> Extensão de Bloqueio
+            </div>
+        </header>
+
+        <aside class="sidebar">
+
+            <div class="focus-header">
+                <h2>Timer</h2>
+                <div class="mode-pills">
+                    <button class="mode-pill active" data-mode="focus">Foco</button>
+                    <button class="mode-pill" data-mode="short">Pausa</button>
+                    <button class="mode-pill" data-mode="long">Longa</button>
+                </div>
+            </div>
+        </aside>
+
+    </div>
     
 </body>
 </html>
