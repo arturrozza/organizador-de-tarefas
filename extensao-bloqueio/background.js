@@ -39,6 +39,8 @@ async function persistState() {
 // ---------- Mensagens (do content script e do popup) ----------
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  console.log('[FocusFlow ext] mensagem recebida no background:', message);
+
   if (message.type === 'session-update') {
     // Veio do content script, refletindo o estado do timer na página do FocusFlow
     extState.isRunning = message.isRunning;
