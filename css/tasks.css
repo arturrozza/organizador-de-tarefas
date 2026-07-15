@@ -1,0 +1,214 @@
+.tasks-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-5);
+}
+
+.tasks-header h2 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.tasks-stats {
+  display: flex;
+  gap: var(--space-4);
+  font-size: 12px;
+  color: var(--muted);
+  font-family: var(--mono);
+}
+
+#tasks-done-count {
+  color: var(--success);
+}
+
+/* ---------- Formulário ---------- */
+
+.task-form {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.task-input {
+  flex: 1;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 14px;
+  transition: border-color 0.2s var(--ease);
+}
+
+.task-input::placeholder {
+  color: var(--muted-soft);
+}
+
+.task-input:focus-visible {
+  border-color: var(--accent);
+}
+
+.task-priority {
+  padding: 0 var(--space-3);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ---------- Filtros ---------- */
+
+.tasks-filters {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.filter-pill {
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+
+.filter-pill:hover {
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+.filter-pill.active {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  border-color: transparent;
+}
+
+/* ---------- Lista de tarefas ---------- */
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.task-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-4) var(--space-4) var(--space-5);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: border-color 0.2s var(--ease), transform 0.15s var(--ease);
+}
+
+.task-item:hover {
+  border-color: var(--border-strong);
+}
+
+.task-item.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-soft);
+}
+
+.task-focus {
+  color: var(--muted-soft);
+  font-size: 14px;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  transition: color 0.2s var(--ease);
+}
+
+.task-focus:hover {
+  color: var(--accent);
+}
+
+.task-item.active .task-focus {
+  color: var(--accent);
+}
+
+/* Tarja lateral de prioridade — a "aba de ficha" */
+.task-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--priority-medium);
+}
+
+.task-item[data-priority="low"]::before {
+  background: var(--priority-low);
+}
+
+.task-item[data-priority="high"]::before {
+  background: var(--priority-high);
+}
+
+.task-checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--border-strong);
+  flex-shrink: 0;
+  transition: background 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+
+.task-checkbox:hover {
+  border-color: var(--accent);
+}
+
+.task-item.done .task-checkbox {
+  background: var(--success);
+  border-color: var(--success);
+}
+
+.task-title {
+  flex: 1;
+  font-size: 14px;
+}
+
+.task-item.done .task-title {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--muted-soft);
+}
+
+.task-delete {
+  color: var(--muted-soft);
+  font-size: 13px;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  transition: color 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+.task-delete:hover {
+  color: var(--danger);
+  background: var(--danger-soft);
+}
+
+/* ---------- Estado vazio ---------- */
+
+.task-empty {
+  display: none;
+  text-align: center;
+  padding: var(--space-7) var(--space-4);
+  color: var(--muted);
+  font-size: 14px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+}
+
+.task-empty.visible {
+  display: block;
+}

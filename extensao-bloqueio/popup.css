@@ -1,0 +1,134 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 300px;
+  background: #000000;
+  color: #f0ead6;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  font-size: 13px;
+}
+
+.popup {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(240, 234, 214, 0.1);
+}
+
+.popup-logo {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.popup-logo .accent {
+  color: #d4af37;
+}
+
+.popup-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #9c8f74;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #6b6250;
+}
+
+.status-dot.blocking {
+  background: #d4af37;
+  box-shadow: 0 0 6px rgba(212, 175, 55, 0.5);
+}
+
+.add-site-form {
+  display: flex;
+  gap: 8px;
+}
+
+.add-site-form input {
+  flex: 1;
+  padding: 8px 10px;
+  background: #1c160c;
+  border: 1px solid rgba(240, 234, 214, 0.1);
+  border-radius: 8px;
+  color: #f0ead6;
+  font-size: 12px;
+}
+
+.add-site-form input::placeholder {
+  color: #6b6250;
+}
+
+.add-site-form button {
+  padding: 0 12px;
+  background: #d4af37;
+  color: #1a1206;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.add-site-form button:hover {
+  background: #e3c25f;
+}
+
+.site-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.site-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  background: #1c160c;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.site-item button {
+  background: none;
+  border: none;
+  color: #6b6250;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.site-item button:hover {
+  color: #b5533f;
+}
+
+.site-empty {
+  display: none;
+  text-align: center;
+  color: #6b6250;
+  padding: 12px 0;
+}
+
+.site-empty.visible {
+  display: block;
+}

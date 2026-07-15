@@ -1,0 +1,57 @@
+:root {
+  /* Cores base — preto profundo com painéis em bronze escuro */
+  --bg: #000000;
+  --surface: #1c160c;
+  --surface-alt: #2b2214;
+  --surface-hover: #3a2e1c;
+
+  /* Texto — creme como principal, branco reservado pra ênfase rara */
+  --text: #f0ead6;
+  --text-strong: #ffffff;
+  --muted: #9c8f74;
+  --muted-soft: #6b6250;
+
+  /* Acento — dourado, luz de abajur */
+  --accent: #d4af37;
+  --accent-strong: #e3c25f;
+  --accent-soft: rgba(212, 175, 55, 0.15);
+  --accent-glow: rgba(212, 175, 55, 0.35);
+
+  /* Estados — derivados da mesma família (evita cores estranhas ao tema) */
+  --success: #8a9a5b;
+  --success-soft: rgba(138, 154, 91, 0.15);
+  --danger: #b5533f;
+  --danger-soft: rgba(181, 83, 63, 0.15);
+
+  /* Prioridade (tarjas laterais) */
+  --priority-low: #6b6250;
+  --priority-medium: #d4af37;
+  --priority-high: #b5533f;
+
+  /* Bordas */
+  --border: rgba(240, 234, 214, 0.08);
+  --border-strong: rgba(240, 234, 214, 0.16);
+
+  /* Tipografia */
+  --font-display: "Space Grotesk", "Segoe UI", sans-serif;
+  --font-body: "Inter", "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "Courier New", monospace;
+
+  /* Espaçamento */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  /* Raio e sombra */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --shadow-panel: 0 20px 50px rgba(0, 0, 0, 0.35);
+
+  /* Timing */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}

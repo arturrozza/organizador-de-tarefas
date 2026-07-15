@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Site bloqueado — FocusFlow</title>
+<link rel="stylesheet" href="blocked.css">
+</head>
+<body>
+
+<div class="blocked-card">
+  <div class="ring"></div>
+  <h1>Você está em foco.</h1>
+  <p id="blocked-message">Este site fica liberado só na pausa.</p>
+  <p class="hint">Volte pro FocusFlow e continue de onde parou.</p>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const site = params.get('site');
+  if (site) {
+    document.getElementById('blocked-message').textContent =
+      `${site} fica liberado só na pausa.`;
+  }
+</script>
+</body>
+</html>

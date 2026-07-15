@@ -1,68 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Organizador de Tarefas</title>
-    
-    <link rel="stylesheet" href="layout.css">
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="responsive.css">
-    <link rel="stylesheet" href="tasks.css">
-    <link rel="stylesheet" href="timer.css">
-    <link rel="stylesheet" href="variables.css">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organizador de Tarefas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/timer.css">
+<link rel="stylesheet" href="css/tasks.css">
+<link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
 
-    <div class="app">
+<div class="app">
 
-        <header class="topbar">
-            <div class="logo"><span>Focus</span>Flow</div>
-            <div class="tagline">Tarefas & Pomodoro</div>
-            <div class="badge-ext" onclick="showExtTip()">
-                <span class="dot"></span> Extensão de Bloqueio
-            </div>
-        </header>
-
-        <aside class="sidebar">
-
-            <div class="focus-header">
-                <h2>Timer</h2>
-                <div class="mode-pills">
-                    <button class="mode-pill active" data-mode="focus">Foco</button>
-                    <button class="mode-pill" data-mode="short">Pausa</button>
-                    <button class="mode-pill" data-mode="long">Longa</button>
-                </div>
-            </div>
-
-            <div class="clock-wrap">
-                <svg class="clock-svg" viewBox="0 0 180 180">
-                    <circle class="clock-track" cx="90" cy="90" r="80"/>
-                    <circle class="clock-prog" id="clock-prog" cx="90" cy="90" r="80"
-                        stroke-dasharray="502.65"
-                        stroke-dashoffset="0"/>
-                </svg>
-                <div class="clock-center">
-                    <div class="clock-time" id="clock-time">25:00</div>
-                    <div class="clock-label" id="clock-label">FOCO</div>
-                </div>
-
-                <div class="timer-controls">
-                    <button class="ctrl-btn primary" id="btn-start" onclick="toggleTimer()">▶ Iniciar</button>
-                    <button class="ctrl-btn" onclick="resetTimer()">↺ Reset</button>
-                </div>
-
-
-                <div class="cycles-row">
-                    <span class="section-label">Ciclos</span>
-                    <div class="cycles-dots" id="cycles-dots"></div>
-                    <span style="font-size:11px;color:var(--muted);font-family:var(--mono);" id="cycle-count">0 / 4</span>
-                </div>
-            </div>
-        </aside>
-
+  <header class="topbar">
+    <div class="logo"><span>Flow</span>State</div>
+    <div class="tagline">Tarefas & Pomodoro</div>
+    <div class="badge-ext" onclick="showExtTip()">
+      <span class="dot"></span> Extensão de Bloqueio
     </div>
-    
+  </header>
+
+  <aside class="sidebar">
+
+    <div class="focus-header">
+      <h2>Timer</h2>
+      <select id="timer-preset" class="timer-preset-select">
+        <option value="classic">Clássico — 25 / 5 / 15</option>
+        <option value="method5217">52/17 — foco prolongado</option>
+        <option value="method9020">90/20 — foco profundo</option>
+      </select>
+      <div class="mode-pills">
+        <button class="mode-pill active" data-mode="focus">Foco</button>
+        <button class="mode-pill" data-mode="short">Pausa</button>
+        <button class="mode-pill" data-mode="long">Longa</button>
+      </div>
+    </div>
+
+    <div class="clock-wrap">
+      <div class="clock-ring">
+        <svg class="clock-svg" viewBox="0 0 180 180">
+          <circle class="clock-track" cx="90" cy="90" r="80"/>
+          <circle class="clock-prog" id="clock-prog" cx="90" cy="90" r="80"
+            stroke-dasharray="502.65"
+            stroke-dashoffset="0"/>
+        </svg>
+        <div class="clock-center">
+          <div class="clock-time" id="clock-time">25:00</div>
+          <div class="clock-label" id="clock-label">FOCO</div>
+        </div>
+      </div>
+
+      <div class="active-task" id="active-task">
+        <span class="active-task-dot"></span>
+        <span id="active-task-name">Nenhuma tarefa selecionada</span>
+      </div>
+
+      <div class="timer-controls">
+        <button class="ctrl-btn primary" id="btn-start">▶ Iniciar</button>
+        <button class="ctrl-btn" id="btn-reset">↺ Reset</button>
+      </div>
+
+      <div class="cycles-row">
+        <span class="section-label">Ciclos</span>
+        <div class="cycles-dots" id="cycles-dots"></div>
+        <span style="font-size:11px;color:var(--muted);font-family:var(--mono);" id="cycle-count">0 / 4</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="content">
+
+    <section class="tasks-header">
+      <h2>Minhas Tarefas</h2>
+      <div class="tasks-stats">
+        <span id="tasks-pending-count">0 pendentes</span>
+        <span id="tasks-done-count">0 concluídas</span>
+      </div>
+    </section>
+
+    <form class="task-form" id="task-form">
+      <input
+        type="text"
+        id="task-input"
+        class="task-input"
+        placeholder="O que você precisa fazer?"
+        autocomplete="off"
+        required
+      >
+      <select id="task-priority" class="task-priority">
+        <option value="low">Baixa</option>
+        <option value="medium" selected>Média</option>
+        <option value="high">Alta</option>
+      </select>
+      <button type="submit" class="ctrl-btn primary">+ Adicionar</button>
+    </form>
+
+    <div class="tasks-filters">
+      <button class="filter-pill active" data-filter="all">Todas</button>
+      <button class="filter-pill" data-filter="pending">Pendentes</button>
+      <button class="filter-pill" data-filter="done">Concluídas</button>
+    </div>
+
+    <ul class="task-list" id="task-list">
+      <!-- render.js insere os <li class="task-item"> aqui dinamicamente -->
+    </ul>
+
+    <p class="task-empty" id="task-empty">Nenhuma tarefa por aqui ainda. Adicione a primeira acima 👆</p>
+
+  </main>
+
+</div>
+
+<script src="js/utils.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/state.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/timer.js"></script>
+<script src="js/tasks.js"></script>
+<script src="js/render.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

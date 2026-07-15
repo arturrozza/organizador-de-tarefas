@@ -42,6 +42,20 @@ const timerState = {
 // ---------- Elementos da tela (preenchidos em initTimer) ----------
 let els = {};
 
+// ---------- Ponte com a extensão de bloqueio ----------
+// A extensão não consegue ler as variáveis do timer.js diretamente
+// (roda em um "mundo isolado" do Chrome). A forma de conversar com ela
+// é disparando um evento customizado no `window`, que o content script
+// da extensão escuta e repassa pro service worker.
+function broadcastSession() {
+  window.dispatchEvent(new CustomEvent('focusflow:session-update', {
+    detail: {
+      isRunning: timerState.isRunning,
+      mode: timerState.mode,
+    },
+  }));
+}
+
 function initTimer() {
   els = {
     presetSelect: qs('#timer-preset'),
@@ -151,6 +165,7 @@ function startTimer() {
   }
 
   timerState.intervalId = setInterval(tick, 1000);
+  broadcastSession();
 }
 
 function pauseTimer() {
@@ -160,12 +175,14 @@ function pauseTimer() {
 
   clearInterval(timerState.intervalId);
   timerState.intervalId = null;
+  broadcastSession();
 }
 
 function resetTimer() {
   pauseTimer();
   timerState.remaining = currentPreset()[timerState.mode];
   updateDisplay();
+  broadcastSession();
 }
 
 // ---------- Contagem regressiva ----------
@@ -211,6 +228,8 @@ function handleModeComplete() {
   } else {
     els.clockRing.classList.remove('is-running');
   }
+
+  broadcastSession();
 }
 
 function getNextMode(finishedMode) {

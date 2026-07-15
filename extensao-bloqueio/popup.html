@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>FocusFlow — Bloqueio</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+<div class="popup">
+
+  <header class="popup-header">
+    <span class="popup-logo"><span class="accent">Focus</span>Flow</span>
+    <span class="popup-status" id="popup-status">
+      <span class="status-dot" id="status-dot"></span>
+      <span id="status-text">Carregando...</span>
+    </span>
+  </header>
+
+  <form class="add-site-form" id="add-site-form">
+    <input
+      type="text"
+      id="site-input"
+      placeholder="ex: youtube.com"
+      autocomplete="off"
+    >
+    <button type="submit">+ Bloquear</button>
+  </form>
+
+  <ul class="site-list" id="site-list">
+    <!-- popup.js preenche aqui -->
+  </ul>
+
+  <p class="site-empty" id="site-empty">Nenhum site cadastrado ainda.</p>
+
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>
