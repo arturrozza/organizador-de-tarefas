@@ -39,8 +39,6 @@ async function persistState() {
 // ---------- Mensagens (do content script e do popup) ----------
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  console.log('[FocusFlow ext] mensagem recebida no background:', message);
-
   if (message.type === 'session-update') {
     // Veio do content script, refletindo o estado do timer na página do FocusFlow
     extState.isRunning = message.isRunning;
@@ -113,15 +111,22 @@ async function updateBlockingRules() {
 }
 
 /**
- * Limpa o domínio digitado pelo usuário (remove "https://", "www.", barras finais)
- * pra virar algo como "youtube.com", que é o formato que o urlFilter espera.
+ * Limpa o domínio digitado pelo usuário — aceita colar de várias formas
+ * (com protocolo, com www., com caminho, query string, etc.) e sempre
+ * retorna algo como "youtube.com", que é o formato que o urlFilter espera.
  */
 function normalizeDomain(raw) {
   if (!raw) return null;
-  return raw
-    .trim()
-    .toLowerCase()
-    .replace(/^https?:\/\//, '')
-    .replace(/^www\./, '')
-    .replace(/\/.*$/, '');
+
+  let value = raw.trim().toLowerCase();
+  if (!value) return null;
+
+  value = value.replace(/^[a-z]+:\/\//, '');  // remove "https://", "http://", etc.
+  value = value.replace(/^www\./, '');         // remove "www."
+  value = value.split('/')[0];                 // remove qualquer caminho depois do domínio
+  value = value.split('?')[0];                 // remove query string
+  value = value.split('#')[0];                 // remove fragmento (#âncora)
+  value = value.replace(/\.+$/, '');           // remove ponto sobrando no final
+
+  return value || null;
 }
